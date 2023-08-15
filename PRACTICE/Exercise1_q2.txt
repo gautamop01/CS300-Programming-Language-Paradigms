@@ -1,0 +1,45 @@
+2) Polymorphic Type Assignments for Functions:
+
+a) fst (x,y) = x - Type: (a, b) -> a
+b) square x = x * x - Type: Num a => a -> a
+c) addVectors (x1,y1) (x2,y2) = (x1 + x2, y1 + y2) - Type: (Num a, Num b) => (a, b) -> (a, b) -> (a, b)
+d) palindrome xs = reverse xs == xs - Type: Eq a => [a] -> Bool
+
+e) const x y = x - Type: a -> b -> a
+f) splitAt n xs = (take n xs, drop n xs) - Type: Int -> [a] -> ([a], [a])
+g) apply f x = f x - Type: (a -> b) -> a -> b
+h) twice f x = f (f x) - Type: (a -> a) -> a -> a
+i) composition f g x = f (g x) - Type: (b -> c) -> (a -> b) -> a -> c
+j) flip f x y = f y x - Type: (a -> b -> c) -> b -> a -> c
+k) pair (f, g) x = (f x, g x) - Type: (a -> b, a -> c) -> a -> (b, c)
+
+
+
+--sone info
+Certainly! Let me explain each of these functions in Haskell:
+
+splitAt:
+
+Type: Int -> [a] -> ([a], [a])
+Description: The splitAt function takes an integer n and a list [a]. It splits the input list at the nth element and returns a tuple containing two lists. The first list contains the first n elements, and the second list contains the remaining elements.
+apply:
+
+Type: (a -> b) -> a -> b
+Description: The apply function takes a function f and a value x. It applies the function f to the value x and returns the result.
+twice:
+
+Type: (a -> a) -> a -> a
+Description: The twice function takes a function f and a value x. It applies the function f twice to the value x and returns the final result.
+composition:
+
+Type: (b -> c) -> (a -> b) -> a -> c
+Description: The composition function takes two functions, f and g, and a value x. It applies the function g to the value x, then applies the function f to the result of g, and returns the final result.
+flip:
+
+Type: (a -> b -> c) -> b -> a -> c
+Description: The flip function takes a function f and two arguments x and y. It swaps the order of the arguments and applies them to the function f.
+pair:
+
+Type: ((a -> b), (a -> c)) -> a -> (b, c)
+Description: The pair function takes a tuple of two functions (f, g) and a value x. It applies both functions f and g to the value x and returns a tuple containing the results.
+These functions are examples of higher-order functions in Haskell, which are functions that either take other functions as arguments or return functions as results. They provide powerful tools for composing and transforming functions in various ways.

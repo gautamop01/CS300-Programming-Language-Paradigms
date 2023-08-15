@@ -1,0 +1,18 @@
+1) Types of Expressions:
+a) [1,2,3,4] - Type: [Int] (List of Integers)
+b) [1, '2', "3"] - Invalid, elements in a list must have the same type.
+c) (1,2,3,4) - Type: (Int, Int, Int, Int) (Tuple of four Integers)
+d) [("Yes", True), ("No", False)] - Type: [(String, Bool)] (List of tuples, each containing a String and a Bool)
+e) [[False], [True], [False, True], [True, False]] - Type: [[Bool]] (List of Lists of Bools)
+f) [tail, reverse] - Type: [ [a] -> [a] ] (List of functions from a list of type a to a list of type a)
+g) (head, tail, reverse) - Type: ([a], [a] -> [a], [a] -> [a]) (Tuple of functions: 1. List of type a, 2. Function from list of type a to list of type a, 3. Function from list of type a to list of type a)
+h) ["x":[]] - Invalid, ["x"] is a list of strings, but [] is an empty list, not a string.
+i) 4==5 - Type: Bool (Boolean)
+j) (==) - Type: Eq a => a -> a -> Bool (Polymorphic equality function)
+k) [] - Type: [a] (Empty list with elements of any type)
+l) () - Type: () (Unit type, also known as "void" in other languages)
+m) show False - Type: String (String representation of a value)
+
+n) read "5" - 2 - Invalid, the subtraction - operator requires both operands to be of the same numeric type.
+
+
