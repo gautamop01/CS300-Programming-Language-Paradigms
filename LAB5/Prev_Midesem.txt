@@ -1,0 +1,142 @@
+
+(2 marks)
+(a) The expression "(+1) $ (0 <)" is invalid because it doesn't form a valid Haskell expression. It appears to be a combination of a function application operator ($) and some incomplete arithmetic and comparison operations. It lacks clarity and a meaningful purpose.
+(b) The expression "subst f g x = f x (g x)" is a valid Haskell function definition. It defines a function "subst" that takes three arguments: "f," "g," and "x." It applies the function "f" to the argument "x" and then applies the result to the function "g" applied to "x."
+
+(2 marks)
+(a) The value of the expression "foldl (-) 0 [1,2,3]" is -6. It computes the left fold of the subtraction operator (-) starting with an initial accumulator value of 0 and applying it to the list [1, 2, 3] as (((0 - 1) - 2) - 3) = -6.
+(b) The value of the expression "foldr (-) 0 [1,2,3]" is 2. It computes the right fold of the subtraction operator (-) starting with an initial accumulator value of 0 and applying it to the list [1, 2, 3] as (1 - (2 - (3 - 0))) = 2.
+
+(2 marks)
+The most general type of the function "f" is:
+
+rust
+Copy code
+f :: [a] -> [b] -> [b]
+The function "f" takes two lists as arguments and returns a list of the same type as the second argument. It behaves as follows:
+
+If the first list is empty, it returns the second list.
+If the second list is empty, it returns an empty list.
+If both lists are non-empty, it recursively processes them by discarding the first element from each list and continuing with the remaining elements until one of the lists becomes empty.
+(3 marks)
+Here's the implementation of the "pairswap" function:
+
+haskell
+Copy code
+pairswap :: [a] -> [a]
+pairswap [] = []
+pairswap (x:y:xs) = y : x : pairswap xs
+This function takes a list and swaps elements pairwise, as described in the question.
+
+(3 marks)
+Here's the implementation of the "connected" function:
+
+haskell
+Copy code
+connected :: [String] -> Bool
+connected [] = True
+connected [_] = True
+connected (x1:x2:xs) = (hammingDistance x1 x2 == 1) && connected (x2 : xs)
+
+hammingDistance :: String -> String -> Int
+hammingDistance [] [] = 0
+hammingDistance (a:as) (b:bs) | a /= b    = 1 + hammingDistance as bs
+                              | otherwise = hammingDistance as bs
+hammingDistance _ _ = error "Input strings must have the same length."
+The "connected" function checks if a list of strings is connected by ensuring that each string is obtained from the previous one by changing a character in exactly one position.
+
+(3 marks)
+Here's the implementation of the "combine" function:
+
+haskell
+Copy code
+combine :: Eq a => [a] -> [[a]]
+combine [] = []
+combine [x] = [[x]]
+combine (x:xs) =
+    let (first, rest) = span (== x) xs
+    in [x : first] ++ combine rest
+This function groups consecutive duplicates into sublists.
+
+(3 marks)
+Here's the folding function "f" for the "separate" function:
+
+haskell
+Copy code
+separate :: String -> ([Char], [Char])
+separate s = foldr f ([], []) s
+    where
+        f c (digits, nonDigits)
+            | isDigit c = (c : digits, nonDigits)
+            | otherwise = (digits, c : nonDigits)
+This function separates the digits and non-digits in a string while maintaining their initial order.
+
+(4 marks)
+Here's the implementation of the "scanl" function:
+
+haskell
+Copy code
+scanl :: (a -> b -> a) -> a -> [b] -> [a]
+scanl _ acc [] = [acc]
+scanl f acc (x:xs) = acc : scanl f (f acc x) xs
+The "scanl" function is a verbose version of "foldl" that returns the list of successive values obtained by applying "foldl."
+
+(4 marks)
+Here's the implementation of the "partitioned" function using list comprehension:
+
+haskell
+Copy code
+partitioned :: [Int] -> Bool
+partitioned [] = False
+partitioned xs = any (\i -> all (<= i) (takeWhile (/= i) xs) && all (> i) (dropWhile (/= i) xs)) xs
+This function returns True if there is an element "n" in the list such that all elements before "n" are less than or equal to "n," and all elements after "n" are greater than "n."
+
+(4 marks)
+Here's the implementation of the "segment" function:
+
+haskell
+Copy code
+segment :: [a] -> [[a]]
+segment [] = [[]]
+segment xs = concatMap (\n -> map (take n) (tails xs)) [1 .. length xs]
+This function returns a list of all the segments of a given list, including the empty segment and all possible contiguous sublists.
+
+
+
+
+---------------------------------------------------------
+
+hat is use of $
+
+ChatGPT
+The "$" symbol in Haskell is used as the function application operator. Its primary purpose is to help eliminate parentheses when applying functions. It has a low precedence, which means it allows you to avoid using explicit parentheses to specify the order of function application.
+
+Consider the following example without the "$" operator:
+
+haskell
+Copy code
+result = foo (bar (baz x))
+Here, you have nested function calls, and you need to use parentheses to clarify the order of evaluation. With "$," you can rewrite this as:
+
+haskell
+Copy code
+result = foo $ bar $ baz x
+Using "$" makes the code more concise and easier to read. It allows you to chain functions together without the need for excessive parentheses.
+
+Here are a few more examples of how "$" can be used:
+
+haskell
+Copy code
+-- Without $
+result1 = f (g x)
+
+-- With $
+result2 = f $ g x
+In both examples, the function "g" is applied to "x," and then the result is passed as an argument to the function "f." The "$" operator simplifies the code by removing the need for explicit parentheses.
+
+
+
+
+
+
+
