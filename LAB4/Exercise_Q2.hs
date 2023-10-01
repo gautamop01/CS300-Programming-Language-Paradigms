@@ -40,6 +40,7 @@ lengthFoldr = foldr (\_ acc -> 1 + acc) 0
 lengthFoldl :: [a] -> Int
 lengthFoldl = foldl (\acc _ -> 1 + acc) 0
 
+
 -- b) (++)
 appendFoldr :: [a] -> [a] -> [a]
 appendFoldr xs ys = foldr (\x acc -> x : acc) ys xs
@@ -68,12 +69,48 @@ anyFoldr p = foldr (\x acc -> p x || acc) False
 anyFoldl :: (a -> Bool) -> [a] -> Bool
 anyFoldl p = foldl (\acc x -> acc || p x) False
 
+
+
+
+
 -- f) all
 allFoldr :: (a -> Bool) -> [a] -> Bool
 allFoldr p = foldr (\x acc -> p x && acc) True
 
 allFoldl :: (a -> Bool) -> [a] -> Bool
 allFoldl p = foldl (\acc x -> acc && p x) True
+
+{-
+-- Example:
+let isEven = even
+let list1 = [2, 4, 6, 8]
+let list2 = [2, 4, 5, 6]
+
+allFoldr isEven list1
+-- Output: True (All elements are even)
+
+allFoldl isEven list1
+-- Output: True (All elements are even)
+
+allFoldr isEven list2
+-- Output: False (Not all elements are even)
+
+allFoldl isEven list2
+-- Output: False (Not all elements are even)
+
+
+-}
+
+
+
+
+
+
+
+
+
+
+
 
 -- g) map
 mapFoldr :: (a -> b) -> [a] -> [b]
@@ -133,6 +170,8 @@ takeWhileFoldr p = foldr (\x acc -> if p x then x : acc else []) []
 -- p) tails
 tailsFoldr :: [a] -> [[a]]
 tailsFoldr xs = foldr (\_ acc -> xs : acc) [[]] xs
+
+
 
 
 

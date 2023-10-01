@@ -10,8 +10,11 @@ majority _ _ _       = False
 
 replaceHead :: [Int] -> Int -> [Int]
 replaceHead [] _ = []      -- Return an empty list if the input list is empty
-{-replaceHead (__:xs) newHead = newHead : xs-}
+-- {-replaceHead (__:xs) newHead = newHead : xs-}
 replaceHead (x:_:xs) newHead = x : newHead : xs  -- for second element 
+replaceThird (x:y:xs) newHead = x : y : newHead : xs -- Replace the third element
+replaceThird xs _ = xs                      -- If the list has fewer than 3 elements, return the original list
+
 
 {-
 main :: IO ()
@@ -35,10 +38,10 @@ curry' f x y = f (x, y)
 plus :: Num a => (a, a) -> a
 plus (x, y) = x + y
 
-main :: IO ()
-main = do
-    let plusCurried = curry' plus
-    putStrLn $ "plusc 2 3: " ++ show (plusCurried 2 3)
+-- main :: IO ()
+-- main = do
+   -- let plusCurried = curry' plus
+   -- putStrLn $ "plusc 2 3: " ++ show (plusCurried 2 3)
 
 
 -- Q7
@@ -52,5 +55,8 @@ main :: IO ()
 main = do
     let multUncurried = uncurry' mult
     putStrLn $ "multuc (2,3): " ++ show (multUncurried (2, 3))
+    
+    
+  
 
 
