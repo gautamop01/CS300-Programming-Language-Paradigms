@@ -130,6 +130,7 @@ beval (p :->: q) env  = not (beval p env) || beval q env  -- Evaluate both sub-p
 -- beval (p :/\: q) and other compound propositions evaluate both sub-propositions and apply logical operators.
 
 
+
 -- Example environment with variable assignments
 env :: Env
 env = [('p', True), ('q', False)]
@@ -139,5 +140,57 @@ result = beval prop1 env  -- Should evaluate to False
 
 
 -- In this example, prop1 is evaluated in the env environment, and result will be False based on the assignments provided in env.
+
+
+
+-- (d) Queue
+-- Lets implemnent a ploymorphic queue data structure in Haskell, make it an instance of 'Show' and define the following in Haskell, make it a instance of `show` and define the following funcitons: `makeQueue`,`isEmpty`,`enqueue`, and `dequeue`.
+
+-- Define the queue data type as a type synonym for pair of lists.
+data Queue a = Queue [a] [a]
+
+-- create an empth queue 
+makeQueue :: Queue a
+makeQueue = Queue [] []
+
+-- Check if the queue is empyty 
+isEmpty :: Queue a -> Bool
+isEmpth (Queue [] []) = True
+isEmpth _ = False
+
+
+-- Enqueue an element 
+enqueue :: a -> Queue a -> Queue a
+enqueue x (Queue front rear) = Queue front (x : rear)
+
+-- Dequeue and element, return a Maybe type since the queue might be empty
+dequeue :: Queue a -> Maybe(a, Queue a)
+dequeue (Queue [] []) = Nothing -- Queue is empty.
+dequeue (Queue (x:xs) rear) = Just (x, Queue xs rear)
+dequeue (Queue [] rear) = dequeue (Queue (reverse rear) [])
+
+
+-- Example usage 
+-- Create an empty queue.
+let q = makeQueue :: Queue Int
+
+-- Check if the queue is empty.
+let empty = isEmpty q  -- Should be True
+
+-- Enqueue elements.
+let q1 = enqueue 1 q
+let q2 = enqueue 2 q1
+
+-- Dequeue elements.
+let (element, q3) = case dequeue q2 of
+                     Just (x, queue) -> (x, queue)
+                     Nothing         -> (-1, makeQueue :: Queue Int)
+-- 'element' should be 1, and 'q3' should be a queue with only the element 2.
+
+-- Check if 'q3' is empty.
+let empty2 = isEmpty q3  -- Should be False
+
+
+
 
 
