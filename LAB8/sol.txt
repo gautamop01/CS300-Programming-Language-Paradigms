@@ -1,0 +1,71 @@
+Here are solutions to the lab exercises in Haskell:
+
+Program to remove whitespace from a file:
+haskell
+Copy code
+import System.IO
+
+removeSpace :: String -> String
+removeSpace = filter (/= ' ')
+
+main :: IO ()
+main = do
+    putStrLn "Enter filename: "
+    fileName <- getLine
+    contents <- readFile fileName
+    putStrLn $ removeSpace contents
+
+Program to randomly select elements from a list:
+haskell
+Copy code
+import System.Random
+
+randSelect :: [a] -> Int -> IO [a]
+randSelect xs n = do
+    gen <- newStdGen
+    return $ take n [xs !! i | i <- randomRs (0, length xs - 1) gen]
+
+main :: IO ()
+main = do
+    putStrLn "Enter a list (e.g., [1,2,3,4,5]): "
+    inputList <- getLine
+    putStrLn "Enter the number of elements to select: "
+    n <- readLn
+    let list = read inputList :: [Int]
+    selected <- randSelect list n
+    print selected
+Define a function tuple for the Maybe monad:
+haskell
+Copy code
+import Control.Applicative
+
+tuple :: Applicative m => m a -> m b -> m (a, b)
+tuple ma mb = (,) <$> ma <*> mb
+Define a monadic generalization of foldl:
+haskell
+Copy code
+foldM :: Monad m => (a -> b -> m a) -> a -> [b] -> m a
+foldM f a [] = return a
+foldM f a (x:xs) = do
+    acc <- f a x
+    foldM f acc xs
+Program to convert a binary number to its decimal equivalent using the Maybe monad:
+haskell
+Copy code
+import Data.Maybe
+
+binToDec :: String -> Maybe Int
+binToDec bin = foldM (\acc bit -> if bit `elem` "01"
+                                   then Just (2 * acc + read [bit])
+                                   else Nothing)
+                     0
+                     bin
+
+main :: IO ()
+main = do
+    putStrLn "Enter a binary number: "
+    binary <- getLine
+    case binToDec binary of
+        Just dec -> putStrLn $ "Just " ++ show dec
+        Nothing -> putStrLn "Nothing, Solve in haskell"
+These Haskell programs should help you complete the lab exercises. 
