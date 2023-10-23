@@ -1,0 +1,36 @@
+Lab Exercise 7 – Prolog
+1)Which of the following are unifiable?
+
+Term 1 Term 2
+X f(a,b)
+f(X,a) g(X,a)
+3 2+1
+book(X,1) book(Z)
+likes(jax,X) likes(X,jax)
+food(X,Y,Z) food(M,M,M)
+[a,b,c,[d,a],[1,2],list] [X | Y]
+[a,b,X] [Y | [3,4]]
+X(a,b) f(Z,Y)
+[X | [Y | T]] [1,2,3,4]
+[X,Y | Z] [a,b,c,d]
+
+
+
+2) Define following predicates for list
+a) sumList(L,N) that holds true iff N is the sum of all elements of L.
+b) gcd(M,N,X) that holds when X is the greatest common divisor of numbers M and N. For example
+gcd(15, 25, 5).
+c) secondlast(L,X) that holds iff X is the second last element of list L.
+d) dupli(L1,L2) that holds true iff L2 is obtained from L1 by duplicating all elements.
+e) element_at(X,L,K) holds true iff X is the K'th element of the list L.
+f) compress(L1,L2) holds true iff the list L2 is obtained from the list L1 by compressing repeated
+occurrences of elements into a single copy of the element.
+g) subset(L,K) that holds iff list K is a subset of list L.
+h) prefixk(P,K,L) that holds true when the list P is the K-length prefix of the list L.
+i) reverse(L,K) that holds iff list K is the reverse of list L.
+j) is_palindrome(L) that holds true iff L is a palindrome list
+
+
+
+3) Define a predicate merge(L,K,M) which, given two ordered lists of integers L and K, returns an
+ordered list M containing all the elements of L and K.
