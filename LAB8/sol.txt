@@ -2,7 +2,7 @@ Here are solutions to the lab exercises in Haskell:
 
 Program to remove whitespace from a file:
 haskell
-Copy code
+
 import System.IO
 
 removeSpace :: String -> String
@@ -17,7 +17,7 @@ main = do
 
 Program to randomly select elements from a list:
 haskell
-Copy code
+
 import System.Random
 
 randSelect :: [a] -> Int -> IO [a]
@@ -36,14 +36,14 @@ main = do
     print selected
 Define a function tuple for the Maybe monad:
 haskell
-Copy code
+
 import Control.Applicative
 
 tuple :: Applicative m => m a -> m b -> m (a, b)
 tuple ma mb = (,) <$> ma <*> mb
 Define a monadic generalization of foldl:
 haskell
-Copy code
+
 foldM :: Monad m => (a -> b -> m a) -> a -> [b] -> m a
 foldM f a [] = return a
 foldM f a (x:xs) = do
@@ -51,7 +51,7 @@ foldM f a (x:xs) = do
     foldM f acc xs
 Program to convert a binary number to its decimal equivalent using the Maybe monad:
 haskell
-Copy code
+
 import Data.Maybe
 
 binToDec :: String -> Maybe Int
